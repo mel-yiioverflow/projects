@@ -209,7 +209,7 @@ $app->match('/key_storage_item/create', function () use ($app) {
             $data = $form->getData();
 
             $update_query = "INSERT INTO `key_storage_item` (`key`, `value`, `comment`, `updated_at`, `created_at`) VALUES (?, ?, ?, ?, ?)";
-            $app['db']->executeUpdate($update_query, array($data['key'], $data['value'], $data['comment'], 1490178417, 1490178417));            
+            $app['db']->executeUpdate($update_query, array($data['key'], $data['value'], $data['comment'], 1490204423, 1490204423));            
 
 
             $app['session']->getFlashBag()->add(
@@ -276,7 +276,7 @@ $app->match('/key_storage_item/edit/{id}', function ($id) use ($app) {
             $data = $form->getData();
 
             $update_query = "UPDATE `key_storage_item` SET `key` = ?, `value` = ?, `comment` = ?, `updated_at` = ?, `created_at` = ? WHERE `key` = ?";
-            $app['db']->executeUpdate($update_query, array($data['key'], $data['value'], $data['comment'], 1490178417, $data['created_at'], $id));            
+            $app['db']->executeUpdate($update_query, array($data['key'], $data['value'], $data['comment'], 1490204423, $data['created_at'], $id));            
 
 
             $app['session']->getFlashBag()->add(

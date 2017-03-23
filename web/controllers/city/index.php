@@ -247,7 +247,7 @@ $app->match('/city/create', function () use ($app) {
             $data = $form->getData();
 
             $update_query = "INSERT INTO `city` (`name`, `state_id`, `country_id`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?, ?)";
-            $app['db']->executeUpdate($update_query, array($data['name'], $data['state_id'], $data['country_id'], 1490178417, 1490178417));            
+            $app['db']->executeUpdate($update_query, array($data['name'], $data['state_id'], $data['country_id'], 1490204423, 1490204423));            
 
 
             $app['session']->getFlashBag()->add(
@@ -348,7 +348,7 @@ $app->match('/city/edit/{id}', function ($id) use ($app) {
             $data = $form->getData();
 
             $update_query = "UPDATE `city` SET `name` = ?, `state_id` = ?, `country_id` = ?, `created_at` = ?, `updated_at` = ? WHERE `id` = ?";
-            $app['db']->executeUpdate($update_query, array($data['name'], $data['state_id'], $data['country_id'], $data['created_at'], 1490178417, $id));            
+            $app['db']->executeUpdate($update_query, array($data['name'], $data['state_id'], $data['country_id'], $data['created_at'], 1490204423, $id));            
 
 
             $app['session']->getFlashBag()->add(

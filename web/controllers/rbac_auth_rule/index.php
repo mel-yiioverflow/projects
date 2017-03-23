@@ -204,7 +204,7 @@ $app->match('/rbac_auth_rule/create', function () use ($app) {
             $data = $form->getData();
 
             $update_query = "INSERT INTO `rbac_auth_rule` (`name`, `data`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?)";
-            $app['db']->executeUpdate($update_query, array($data['name'], $data['data'], 1490178417, 1490178417));            
+            $app['db']->executeUpdate($update_query, array($data['name'], $data['data'], 1490204423, 1490204423));            
 
 
             $app['session']->getFlashBag()->add(
@@ -269,7 +269,7 @@ $app->match('/rbac_auth_rule/edit/{id}', function ($id) use ($app) {
             $data = $form->getData();
 
             $update_query = "UPDATE `rbac_auth_rule` SET `name` = ?, `data` = ?, `created_at` = ?, `updated_at` = ? WHERE `name` = ?";
-            $app['db']->executeUpdate($update_query, array($data['name'], $data['data'], $data['created_at'], 1490178417, $id));            
+            $app['db']->executeUpdate($update_query, array($data['name'], $data['data'], $data['created_at'], 1490204423, $id));            
 
 
             $app['session']->getFlashBag()->add(

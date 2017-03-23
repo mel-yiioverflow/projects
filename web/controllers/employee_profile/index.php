@@ -294,7 +294,7 @@ $app->match('/employee_profile/create', function () use ($app) {
             $data = $form->getData();
 
             $update_query = "INSERT INTO `employee_profile` (`location`, `city_id`, `state_id`, `country_id`, `employee_designation`, `resume`, `remarks`, `status`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $app['db']->executeUpdate($update_query, array($data['location'], $data['city_id'], $data['state_id'], $data['country_id'], $data['employee_designation'], $data['resume'], $data['remarks'], $data['status'], 1490178417, 1490178417));            
+            $app['db']->executeUpdate($update_query, array($data['location'], $data['city_id'], $data['state_id'], $data['country_id'], $data['employee_designation'], $data['resume'], $data['remarks'], $data['status'], 1490204423, 1490204423));            
 
 
             $app['session']->getFlashBag()->add(
@@ -422,7 +422,7 @@ $app->match('/employee_profile/edit/{id}', function ($id) use ($app) {
             $data = $form->getData();
 
             $update_query = "UPDATE `employee_profile` SET `location` = ?, `city_id` = ?, `state_id` = ?, `country_id` = ?, `employee_designation` = ?, `resume` = ?, `remarks` = ?, `status` = ?, `created_at` = ?, `updated_at` = ? WHERE `id` = ?";
-            $app['db']->executeUpdate($update_query, array($data['location'], $data['city_id'], $data['state_id'], $data['country_id'], $data['employee_designation'], $data['resume'], $data['remarks'], $data['status'], $data['created_at'], 1490178417, $id));            
+            $app['db']->executeUpdate($update_query, array($data['location'], $data['city_id'], $data['state_id'], $data['country_id'], $data['employee_designation'], $data['resume'], $data['remarks'], $data['status'], $data['created_at'], 1490204423, $id));            
 
 
             $app['session']->getFlashBag()->add(

@@ -48,7 +48,7 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     )
 ));
 
-$app['asset_path'] = 'http://abc.local/resources';
+$app['asset_path'] = 'http://crudadmingenerator.local/resources';
 //End Configuration
 $app['debug'] = true;
 	// array of REGEX column name to display for foreigner key insted of ID

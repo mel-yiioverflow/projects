@@ -252,7 +252,7 @@ $app->match('/article/create', function () use ($app) {
             $data = $form->getData();
 
             $update_query = "INSERT INTO `article` (`slug`, `title`, `body`, `view`, `category_id`, `thumbnail_base_url`, `thumbnail_path`, `status`, `created_by`, `updated_by`, `published_at`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $app['db']->executeUpdate($update_query, array($data['slug'], $data['title'], $data['body'], $data['view'], $data['category_id'], $data['thumbnail_base_url'], $data['thumbnail_path'], $data['status'], $data['created_by'], $data['updated_by'], $data['published_at'], 1490178417, 1490178417));            
+            $app['db']->executeUpdate($update_query, array($data['slug'], $data['title'], $data['body'], $data['view'], $data['category_id'], $data['thumbnail_base_url'], $data['thumbnail_path'], $data['status'], $data['created_by'], $data['updated_by'], $data['published_at'], 1490204423, 1490204423));            
 
 
             $app['session']->getFlashBag()->add(
@@ -335,7 +335,7 @@ $app->match('/article/edit/{id}', function ($id) use ($app) {
             $data = $form->getData();
 
             $update_query = "UPDATE `article` SET `slug` = ?, `title` = ?, `body` = ?, `view` = ?, `category_id` = ?, `thumbnail_base_url` = ?, `thumbnail_path` = ?, `status` = ?, `created_by` = ?, `updated_by` = ?, `published_at` = ?, `created_at` = ?, `updated_at` = ? WHERE `id` = ?";
-            $app['db']->executeUpdate($update_query, array($data['slug'], $data['title'], $data['body'], $data['view'], $data['category_id'], $data['thumbnail_base_url'], $data['thumbnail_path'], $data['status'], $data['created_by'], $data['updated_by'], $data['published_at'], $data['created_at'], 1490178417, $id));            
+            $app['db']->executeUpdate($update_query, array($data['slug'], $data['title'], $data['body'], $data['view'], $data['category_id'], $data['thumbnail_base_url'], $data['thumbnail_path'], $data['status'], $data['created_by'], $data['updated_by'], $data['published_at'], $data['created_at'], 1490204423, $id));            
 
 
             $app['session']->getFlashBag()->add(

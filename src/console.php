@@ -53,12 +53,12 @@ $console
                 
 		$tables = array();
 		foreach($dbTables as $dbTable){
-
-			if(count($dbTable['columns']) <= 1){
+                    	if(count($dbTable['columns']) <= 1){
 				continue;
 			}
 
 			$table_name = $dbTable['name'];
+                        $TABLES = $table_name;
 			$table_columns = array();
 			$primary_key = false;
 
