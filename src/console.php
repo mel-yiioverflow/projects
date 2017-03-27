@@ -21,11 +21,29 @@ $console = new Application('CRUD Admin Generator command instalation', '1.0');
 
 $console
 	->register('generate:admin')
-	->setDefinition(array())
+	->setDefinition(array(
+            new InputArgument('arg1', InputArgument::OPTIONAL),
+            new InputArgument('arg2', InputArgument::IS_ARRAY),
+            ))
 	->setDescription("Generate administrator")
 	->setCode(function (InputInterface $input, OutputInterface $output) use ($app) {
+                $args = $input->getArgument('arg2');
+                $db = $input->getArgument('arg1');
+                if(($db != NULL) && ($args != NULL))
+                {
+                        $getTablesQuery = array(); // Stop errors when $words is empty
 
-		$getTablesQuery = "SHOW TABLES";
+                        foreach($args as $arg){
+                            $getTablesQuery[] = "Tables_in_".$db." LIKE '%".$arg."'";
+                        }
+
+                        $getTablesQuery = "SHOW TABLES WHERE ".implode(" OR ", $getTablesQuery);
+                        //echo $getTablesQuery;exit;
+                }
+                else 
+                {
+                        $getTablesQuery = "SHOW TABLES";
+                }
 		$getTablesResult = $app['db']->fetchAll($getTablesQuery, array());
 
 		$_dbTables = array();
@@ -58,8 +76,7 @@ $console
 			}
 
 			$table_name = $dbTable['name'];
-                        $TABLES = $table_name;
-			$table_columns = array();
+                        $table_columns = array();
 			$primary_key = false;
 
 			$primary_keys = 0;

@@ -4,14 +4,14 @@
 
     <div class="wrapper row-offcanvas row-offcanvas-left">
 
-        {% include 'menu.html.twig' with {'option': 'city_edit'} %}
+        {% include 'menu.html.twig' with {'option': 'students_edit'} %}
 
         <!-- Right side column. Contains the navbar and content of the page -->
         <aside class="right-side">                
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Edit City {{ id }}
+                    Edit Students {{ id }}
                 </h1>
             </section>
 
@@ -33,13 +33,23 @@
                                 <div class="box-body">
 
 									<div class='form-group'>
-									    {{ form_label(form.state_id) }}
-									    {{ form_widget(form.state_id, { attr: { 'class': 'form-control' }}) }}
+									    {{ form_label(form.name) }}
+									    {{ form_widget(form.name, { attr: { 'class': 'form-control' }}) }}
 									</div>
 
 									<div class='form-group'>
-									    {{ form_label(form.name) }}
-									    {{ form_widget(form.name, { attr: { 'class': 'form-control' }}) }}
+									    {{ form_label(form.age) }}
+									    {{ form_widget(form.age, { attr: { 'class': 'form-control' }}) }}
+									</div>
+
+									<div class='form-group'>
+									    {{ form_label(form.gender) }}
+									    {{ form_widget(form.gender, { attr: { 'class': 'form-control' }}) }}
+									</div>
+
+									<div class='form-group'>
+									    {{ form_label(form.place) }}
+									    {{ form_widget(form.place, { attr: { 'class': 'form-control' }}) }}
 									</div>
 
                                                  

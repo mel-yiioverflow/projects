@@ -237,7 +237,7 @@ $app->match('/widget_carousel_item/create', function () use ($app) {
             $data = $form->getData();
 
             $update_query = "INSERT INTO `widget_carousel_item` (`carousel_id`, `base_url`, `path`, `type`, `url`, `caption`, `status`, `order`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $app['db']->executeUpdate($update_query, array($data['carousel_id'], $data['base_url'], $data['path'], $data['type'], $data['url'], $data['caption'], $data['status'], $data['order'], 1490204423, 1490204423));            
+            $app['db']->executeUpdate($update_query, array($data['carousel_id'], $data['base_url'], $data['path'], $data['type'], $data['url'], $data['caption'], $data['status'], $data['order'], 1490609833, 1490609833));            
 
 
             $app['session']->getFlashBag()->add(
@@ -314,7 +314,7 @@ $app->match('/widget_carousel_item/edit/{id}', function ($id) use ($app) {
             $data = $form->getData();
 
             $update_query = "UPDATE `widget_carousel_item` SET `carousel_id` = ?, `base_url` = ?, `path` = ?, `type` = ?, `url` = ?, `caption` = ?, `status` = ?, `order` = ?, `created_at` = ?, `updated_at` = ? WHERE `id` = ?";
-            $app['db']->executeUpdate($update_query, array($data['carousel_id'], $data['base_url'], $data['path'], $data['type'], $data['url'], $data['caption'], $data['status'], $data['order'], $data['created_at'], 1490204423, $id));            
+            $app['db']->executeUpdate($update_query, array($data['carousel_id'], $data['base_url'], $data['path'], $data['type'], $data['url'], $data['caption'], $data['status'], $data['order'], $data['created_at'], 1490609833, $id));            
 
 
             $app['session']->getFlashBag()->add(

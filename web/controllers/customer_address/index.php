@@ -16,7 +16,7 @@ require_once __DIR__.'/../../../src/app.php';
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-$app->match('/user_token/list', function (Symfony\Component\HttpFoundation\Request $request) use ($app) {  
+$app->match('/customer_address/list', function (Symfony\Component\HttpFoundation\Request $request) use ($app) {  
     $start = 0;
     $vars = $request->query->all();
     $qsStart = (int)$vars["start"];
@@ -45,9 +45,9 @@ $app->match('/user_token/list', function (Symfony\Component\HttpFoundation\Reque
     $table_columns = array(
 		'id', 
 		'user_id', 
-		'type', 
-		'token', 
-		'expire_at', 
+		'city_id', 
+		'address_line_1', 
+		'address_line_2', 
 		'created_at', 
 		'updated_at', 
 
@@ -56,9 +56,9 @@ $app->match('/user_token/list', function (Symfony\Component\HttpFoundation\Reque
     $table_columns_type = array(
 		'int(11)', 
 		'int(11)', 
-		'varchar(255)', 
-		'varchar(40)', 
 		'int(11)', 
+		'varchar(100)', 
+		'varchar(100)', 
 		'int(11)', 
 		'int(11)', 
 
@@ -82,9 +82,9 @@ $app->match('/user_token/list', function (Symfony\Component\HttpFoundation\Reque
         $i = $i + 1;
     }
     
-    $recordsTotal = $app['db']->executeQuery("SELECT * FROM `user_token`" . $whereClause . $orderClause)->rowCount();
+    $recordsTotal = $app['db']->executeQuery("SELECT * FROM `customer_address`" . $whereClause . $orderClause)->rowCount();
     
-    $find_sql = "SELECT * FROM `user_token`". $whereClause . $orderClause . " LIMIT ". $index . "," . $rowsPerPage;
+    $find_sql = "SELECT * FROM `customer_address`". $whereClause . $orderClause . " LIMIT ". $index . "," . $rowsPerPage;
     $rows_sql = $app['db']->fetchAll($find_sql, array());
     
     foreach($rows_sql as $row_key => $row_sql){
@@ -93,15 +93,19 @@ $app->match('/user_token/list', function (Symfony\Component\HttpFoundation\Reque
             {
                 $row_sql[$table_columns[$i]] = date('d/m/Y',$row_sql[$table_columns[$i]]);
             }
-			if($table_columns[$i] == 'user_id'){
-			    $findexternal_sql = 'SELECT `email` FROM `user` WHERE `id` = ?';
-			    $findexternal_row = $app['db']->fetchAssoc($findexternal_sql, array($row_sql[$table_columns[$i]]));
-			    $rows[$row_key][$table_columns[$i]] = $findexternal_row['email'];
-			}
-			else{
-			    $rows[$row_key][$table_columns[$i]] = $row_sql[$table_columns[$i]];
-			}
-
+		if( $table_columns_type[$i] != "blob") {
+				$rows[$row_key][$table_columns[$i]] = $row_sql[$table_columns[$i]];
+		} else {				if( !$row_sql[$table_columns[$i]] ) {
+						$rows[$row_key][$table_columns[$i]] = "0 Kb.";
+				} else {
+						$rows[$row_key][$table_columns[$i]] = " <a target='__blank' href='menu/download?id=" . $row_sql[$table_columns[0]];
+						$rows[$row_key][$table_columns[$i]] .= "&fldname=" . $table_columns[$i];
+						$rows[$row_key][$table_columns[$i]] .= "&idfld=" . $table_columns[0];
+						$rows[$row_key][$table_columns[$i]] .= "'>";
+						$rows[$row_key][$table_columns[$i]] .= number_format(strlen($row_sql[$table_columns[$i]]) / 1024, 2) . " Kb.";
+						$rows[$row_key][$table_columns[$i]] .= "</a>";
+				}
+		}
 
         }
     }    
@@ -119,7 +123,7 @@ $app->match('/user_token/list', function (Symfony\Component\HttpFoundation\Reque
 
 
 /* Download blob img */
-$app->match('/user_token/download', function (Symfony\Component\HttpFoundation\Request $request) use ($app) { 
+$app->match('/customer_address/download', function (Symfony\Component\HttpFoundation\Request $request) use ($app) { 
     
     // menu
     $rowid = $request->get('id');
@@ -128,7 +132,7 @@ $app->match('/user_token/download', function (Symfony\Component\HttpFoundation\R
     
     if( !$rowid || !$fieldname ) die("Invalid data");
     
-    $find_sql = "SELECT " . $fieldname . " FROM " . user_token . " WHERE ".$idfldname." = ?";
+    $find_sql = "SELECT " . $fieldname . " FROM " . customer_address . " WHERE ".$idfldname." = ?";
     $row_sql = $app['db']->fetchAssoc($find_sql, array($rowid));
 
     if(!$row_sql){
@@ -156,14 +160,14 @@ $app->match('/user_token/download', function (Symfony\Component\HttpFoundation\R
 
 
 
-$app->match('/user_token', function () use ($app) {
+$app->match('/customer_address', function () use ($app) {
     
 	$table_columns = array(
 		'id', 
 		'user_id', 
-		'type', 
-		'token', 
-		'expire_at', 
+		'city_id', 
+		'address_line_1', 
+		'address_line_2', 
 		'created_at', 
 		'updated_at', 
 
@@ -171,23 +175,23 @@ $app->match('/user_token', function () use ($app) {
 
     $primary_key = "id";	
 
-    return $app['twig']->render('user_token/list.html.twig', array(
+    return $app['twig']->render('customer_address/list.html.twig', array(
     	"table_columns" => $table_columns,
         "primary_key" => $primary_key
     ));
         
 })
-->bind('user_token_list');
+->bind('customer_address_list');
 
 
 
-$app->match('/user_token/create', function () use ($app) {
+$app->match('/customer_address/create', function () use ($app) {
     
     $initial_data = array(
 		'user_id' => '', 
-		'type' => '', 
-		'token' => '', 
-		'expire_at' => '', 
+		'city_id' => '', 
+		'address_line_1' => '', 
+		'address_line_2' => '', 
 		'created_at' => '', 
 		'updated_at' => '', 
 
@@ -195,29 +199,12 @@ $app->match('/user_token/create', function () use ($app) {
 
     $form = $app['form.factory']->createBuilder('form', $initial_data);
 
-	$options = array();
-	$findexternal_sql = 'SELECT `id`, `email` FROM `user`';
-	$findexternal_rows = $app['db']->fetchAll($findexternal_sql, array());
-	foreach($findexternal_rows as $findexternal_row){
-	    $options[$findexternal_row['id']] = $findexternal_row['email'];
-	}
-	if(count($options) > 0){
-	    $form = $form->add('user_id', 'choice', array(
-	        'required' => true,
-	        'choices' => $options,
-	        'expanded' => false,
-	        'constraints' => new Assert\Choice(array_keys($options))
-	    ));
-	}
-	else{
-	    $form = $form->add('user_id', 'text', array('required' => true));
-	}
 
 
-
-	$form = $form->add('type', 'text', array('required' => true));
-	$form = $form->add('token', 'text', array('required' => true));
-	$form = $form->add('expire_at', 'text', array('required' => false));
+	$form = $form->add('user_id', 'text', array('required' => false));
+	$form = $form->add('city_id', 'text', array('required' => false));
+	$form = $form->add('address_line_1', 'text', array('required' => false));
+	$form = $form->add('address_line_2', 'text', array('required' => false));
 
 
     $form = $form->getForm();
@@ -229,33 +216,33 @@ $app->match('/user_token/create', function () use ($app) {
         if ($form->isValid()) {
             $data = $form->getData();
 
-            $update_query = "INSERT INTO `user_token` (`user_id`, `type`, `token`, `expire_at`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?, ?, ?)";
-            $app['db']->executeUpdate($update_query, array($data['user_id'], $data['type'], $data['token'], $data['expire_at'], 1490609833, 1490609833));            
+            $update_query = "INSERT INTO `customer_address` (`user_id`, `city_id`, `address_line_1`, `address_line_2`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?, ?, ?)";
+            $app['db']->executeUpdate($update_query, array($data['user_id'], $data['city_id'], $data['address_line_1'], $data['address_line_2'], 1490612219, 1490612219));            
 
 
             $app['session']->getFlashBag()->add(
                 'success',
                 array(
-                    'message' => 'user_token created!',
+                    'message' => 'customer_address created!',
                 )
             );
-            return $app->redirect($app['url_generator']->generate('user_token_list'));
+            return $app->redirect($app['url_generator']->generate('customer_address_list'));
 
         }
     }
 
-    return $app['twig']->render('user_token/create.html.twig', array(
+    return $app['twig']->render('customer_address/create.html.twig', array(
         "form" => $form->createView()
     ));
         
 })
-->bind('user_token_create');
+->bind('customer_address_create');
 
 
 
-$app->match('/user_token/edit/{id}', function ($id) use ($app) {
+$app->match('/customer_address/edit/{id}', function ($id) use ($app) {
 
-    $find_sql = "SELECT * FROM `user_token` WHERE `id` = ?";
+    $find_sql = "SELECT * FROM `customer_address` WHERE `id` = ?";
     $row_sql = $app['db']->fetchAssoc($find_sql, array($id));
 
     if(!$row_sql){
@@ -265,15 +252,15 @@ $app->match('/user_token/edit/{id}', function ($id) use ($app) {
                 'message' => 'Row not found!',
             )
         );        
-        return $app->redirect($app['url_generator']->generate('user_token_list'));
+        return $app->redirect($app['url_generator']->generate('customer_address_list'));
     }
 
     
     $initial_data = array(
 		'user_id' => $row_sql['user_id'], 
-		'type' => $row_sql['type'], 
-		'token' => $row_sql['token'], 
-		'expire_at' => $row_sql['expire_at'], 
+		'city_id' => $row_sql['city_id'], 
+		'address_line_1' => $row_sql['address_line_1'], 
+		'address_line_2' => $row_sql['address_line_2'], 
 		'created_at' => $row_sql['created_at'], 
 		'updated_at' => $row_sql['updated_at'], 
 
@@ -282,28 +269,11 @@ $app->match('/user_token/edit/{id}', function ($id) use ($app) {
 
     $form = $app['form.factory']->createBuilder('form', $initial_data);
 
-	$options = array();
-	$findexternal_sql = 'SELECT `id`, `email` FROM `user`';
-	$findexternal_rows = $app['db']->fetchAll($findexternal_sql, array());
-	foreach($findexternal_rows as $findexternal_row){
-	    $options[$findexternal_row['id']] = $findexternal_row['email'];
-	}
-	if(count($options) > 0){
-	    $form = $form->add('user_id', 'choice', array(
-	        'required' => true,
-	        'choices' => $options,
-	        'expanded' => false,
-	        'constraints' => new Assert\Choice(array_keys($options))
-	    ));
-	}
-	else{
-	    $form = $form->add('user_id', 'text', array('required' => true));
-	}
 
-
-	$form = $form->add('type', 'text', array('required' => true));
-	$form = $form->add('token', 'text', array('required' => true));
-	$form = $form->add('expire_at', 'text', array('required' => false));
+	$form = $form->add('user_id', 'text', array('required' => false));
+	$form = $form->add('city_id', 'text', array('required' => false));
+	$form = $form->add('address_line_1', 'text', array('required' => false));
+	$form = $form->add('address_line_2', 'text', array('required' => false));
 
 
     $form = $form->getForm();
@@ -315,44 +285,44 @@ $app->match('/user_token/edit/{id}', function ($id) use ($app) {
         if ($form->isValid()) {
             $data = $form->getData();
 
-            $update_query = "UPDATE `user_token` SET `user_id` = ?, `type` = ?, `token` = ?, `expire_at` = ?, `created_at` = ?, `updated_at` = ? WHERE `id` = ?";
-            $app['db']->executeUpdate($update_query, array($data['user_id'], $data['type'], $data['token'], $data['expire_at'], $data['created_at'], 1490609833, $id));            
+            $update_query = "UPDATE `customer_address` SET `user_id` = ?, `city_id` = ?, `address_line_1` = ?, `address_line_2` = ?, `created_at` = ?, `updated_at` = ? WHERE `id` = ?";
+            $app['db']->executeUpdate($update_query, array($data['user_id'], $data['city_id'], $data['address_line_1'], $data['address_line_2'], $data['created_at'], 1490612219, $id));            
 
 
             $app['session']->getFlashBag()->add(
                 'success',
                 array(
-                    'message' => 'user_token edited!',
+                    'message' => 'customer_address edited!',
                 )
             );
-            return $app->redirect($app['url_generator']->generate('user_token_edit', array("id" => $id)));
+            return $app->redirect($app['url_generator']->generate('customer_address_edit', array("id" => $id)));
 
         }
     }
 
-    return $app['twig']->render('user_token/edit.html.twig', array(
+    return $app['twig']->render('customer_address/edit.html.twig', array(
         "form" => $form->createView(),
         "id" => $id
     ));
         
 })
-->bind('user_token_edit');
+->bind('customer_address_edit');
 
 
 
-$app->match('/user_token/delete/{id}', function ($id) use ($app) {
+$app->match('/customer_address/delete/{id}', function ($id) use ($app) {
 
-    $find_sql = "SELECT * FROM `user_token` WHERE `id` = ?";
+    $find_sql = "SELECT * FROM `customer_address` WHERE `id` = ?";
     $row_sql = $app['db']->fetchAssoc($find_sql, array($id));
 
     if($row_sql){
-        $delete_query = "DELETE FROM `user_token` WHERE `id` = ?";
+        $delete_query = "DELETE FROM `customer_address` WHERE `id` = ?";
         $app['db']->executeUpdate($delete_query, array($id));
 
         $app['session']->getFlashBag()->add(
             'success',
             array(
-                'message' => 'user_token deleted!',
+                'message' => 'customer_address deleted!',
             )
         );
     }
@@ -365,10 +335,10 @@ $app->match('/user_token/delete/{id}', function ($id) use ($app) {
         );  
     }
 
-    return $app->redirect($app['url_generator']->generate('user_token_list'));
+    return $app->redirect($app['url_generator']->generate('customer_address_list'));
 
 })
-->bind('user_token_delete');
+->bind('customer_address_delete');
 
 
 

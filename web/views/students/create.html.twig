@@ -4,14 +4,14 @@
 
     <div class="wrapper row-offcanvas row-offcanvas-left">
 
-        {% include 'menu.html.twig' with {'option': 'city_edit'} %}
+        {% include 'menu.html.twig' with {'option': 'students_create'} %}
 
         <!-- Right side column. Contains the navbar and content of the page -->
         <aside class="right-side">                
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Edit City {{ id }}
+                    Create Students
                 </h1>
             </section>
 
@@ -33,23 +33,33 @@
                                 <div class="box-body">
 
 									<div class='form-group'>
-									    {{ form_label(form.state_id) }}
-									    {{ form_widget(form.state_id, { attr: { 'class': 'form-control' }}) }}
-									</div>
-
-									<div class='form-group'>
 									    {{ form_label(form.name) }}
 									    {{ form_widget(form.name, { attr: { 'class': 'form-control' }}) }}
 									</div>
 
-                                                 
+									<div class='form-group'>
+									    {{ form_label(form.age) }}
+									    {{ form_widget(form.age, { attr: { 'class': 'form-control' }}) }}
+									</div>
+
+									<div class='form-group'>
+									    {{ form_label(form.gender) }}
+									    {{ form_widget(form.gender, { attr: { 'class': 'form-control' }}) }}
+									</div>
+
+									<div class='form-group'>
+									    {{ form_label(form.place) }}
+									    {{ form_widget(form.place, { attr: { 'class': 'form-control' }}) }}
+									</div>
+
+                                                  
 
                                 </div><!-- /.box-body -->
 
                                 {{ form_rest(form) }}
 
                                 <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary">Edit</button>
+                                    <button type="submit" class="btn btn-primary">Create</button>
                                 </div>
 
                             </div><!-- /.box -->

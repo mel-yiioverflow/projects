@@ -220,7 +220,7 @@ $app->match('/employee_salary/create', function () use ($app) {
             $data = $form->getData();
 
             $update_query = "INSERT INTO `employee_salary` (`employee_id`, `expense_id`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?)";
-            $app['db']->executeUpdate($update_query, array($data['employee_id'], $data['expense_id'], 1490204423, 1490204423));            
+            $app['db']->executeUpdate($update_query, array($data['employee_id'], $data['expense_id'], 1490609833, 1490609833));            
 
 
             $app['session']->getFlashBag()->add(
@@ -302,7 +302,7 @@ $app->match('/employee_salary/edit/{id}', function ($id) use ($app) {
             $data = $form->getData();
 
             $update_query = "UPDATE `employee_salary` SET `employee_id` = ?, `expense_id` = ?, `created_at` = ?, `updated_at` = ? WHERE `id` = ?";
-            $app['db']->executeUpdate($update_query, array($data['employee_id'], $data['expense_id'], $data['created_at'], 1490204423, $id));            
+            $app['db']->executeUpdate($update_query, array($data['employee_id'], $data['expense_id'], $data['created_at'], 1490609833, $id));            
 
 
             $app['session']->getFlashBag()->add(

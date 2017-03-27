@@ -103,25 +103,19 @@ $app->match('/contacts/list', function (Symfony\Component\HttpFoundation\Request
             {
                 $row_sql[$table_columns[$i]] = date('d/m/Y',$row_sql[$table_columns[$i]]);
             }
-			if($table_columns[$i] == 'city_id'){
-			    $findexternal_sql = 'SELECT `name` FROM `city` WHERE `id` = ?';
-			    $findexternal_row = $app['db']->fetchAssoc($findexternal_sql, array($row_sql[$table_columns[$i]]));
-			    $rows[$row_key][$table_columns[$i]] = $findexternal_row['name'];
-			}
-			else if($table_columns[$i] == 'state_id'){
-			    $findexternal_sql = 'SELECT `name` FROM `state` WHERE `id` = ?';
-			    $findexternal_row = $app['db']->fetchAssoc($findexternal_sql, array($row_sql[$table_columns[$i]]));
-			    $rows[$row_key][$table_columns[$i]] = $findexternal_row['name'];
-			}
-			else if($table_columns[$i] == 'country_id'){
-			    $findexternal_sql = 'SELECT `name` FROM `country` WHERE `id` = ?';
-			    $findexternal_row = $app['db']->fetchAssoc($findexternal_sql, array($row_sql[$table_columns[$i]]));
-			    $rows[$row_key][$table_columns[$i]] = $findexternal_row['name'];
-			}
-			else{
-			    $rows[$row_key][$table_columns[$i]] = $row_sql[$table_columns[$i]];
-			}
-
+		if( $table_columns_type[$i] != "blob") {
+				$rows[$row_key][$table_columns[$i]] = $row_sql[$table_columns[$i]];
+		} else {				if( !$row_sql[$table_columns[$i]] ) {
+						$rows[$row_key][$table_columns[$i]] = "0 Kb.";
+				} else {
+						$rows[$row_key][$table_columns[$i]] = " <a target='__blank' href='menu/download?id=" . $row_sql[$table_columns[0]];
+						$rows[$row_key][$table_columns[$i]] .= "&fldname=" . $table_columns[$i];
+						$rows[$row_key][$table_columns[$i]] .= "&idfld=" . $table_columns[0];
+						$rows[$row_key][$table_columns[$i]] .= "'>";
+						$rows[$row_key][$table_columns[$i]] .= number_format(strlen($row_sql[$table_columns[$i]]) / 1024, 2) . " Kb.";
+						$rows[$row_key][$table_columns[$i]] .= "</a>";
+				}
+		}
 
         }
     }    
@@ -225,60 +219,6 @@ $app->match('/contacts/create', function () use ($app) {
 
     $form = $app['form.factory']->createBuilder('form', $initial_data);
 
-	$options = array();
-	$findexternal_sql = 'SELECT `id`, `name` FROM `city`';
-	$findexternal_rows = $app['db']->fetchAll($findexternal_sql, array());
-	foreach($findexternal_rows as $findexternal_row){
-	    $options[$findexternal_row['id']] = $findexternal_row['name'];
-	}
-	if(count($options) > 0){
-	    $form = $form->add('city_id', 'choice', array(
-	        'required' => false,
-	        'choices' => $options,
-	        'expanded' => false,
-	        'constraints' => new Assert\Choice(array_keys($options))
-	    ));
-	}
-	else{
-	    $form = $form->add('city_id', 'text', array('required' => false));
-	}
-
-	$options = array();
-	$findexternal_sql = 'SELECT `id`, `name` FROM `state`';
-	$findexternal_rows = $app['db']->fetchAll($findexternal_sql, array());
-	foreach($findexternal_rows as $findexternal_row){
-	    $options[$findexternal_row['id']] = $findexternal_row['name'];
-	}
-	if(count($options) > 0){
-	    $form = $form->add('state_id', 'choice', array(
-	        'required' => false,
-	        'choices' => $options,
-	        'expanded' => false,
-	        'constraints' => new Assert\Choice(array_keys($options))
-	    ));
-	}
-	else{
-	    $form = $form->add('state_id', 'text', array('required' => false));
-	}
-
-	$options = array();
-	$findexternal_sql = 'SELECT `id`, `name` FROM `country`';
-	$findexternal_rows = $app['db']->fetchAll($findexternal_sql, array());
-	foreach($findexternal_rows as $findexternal_row){
-	    $options[$findexternal_row['id']] = $findexternal_row['name'];
-	}
-	if(count($options) > 0){
-	    $form = $form->add('country_id', 'choice', array(
-	        'required' => false,
-	        'choices' => $options,
-	        'expanded' => false,
-	        'constraints' => new Assert\Choice(array_keys($options))
-	    ));
-	}
-	else{
-	    $form = $form->add('country_id', 'text', array('required' => false));
-	}
-
 
 
 	$form = $form->add('employer_id', 'text', array('required' => false));
@@ -287,6 +227,9 @@ $app->match('/contacts/create', function () use ($app) {
 	$form = $form->add('phone', 'text', array('required' => false));
 	$form = $form->add('email', 'text', array('required' => false));
 	$form = $form->add('location', 'text', array('required' => false));
+	$form = $form->add('city_id', 'text', array('required' => false));
+	$form = $form->add('state_id', 'text', array('required' => false));
+	$form = $form->add('country_id', 'text', array('required' => false));
 
 
     $form = $form->getForm();
@@ -299,7 +242,7 @@ $app->match('/contacts/create', function () use ($app) {
             $data = $form->getData();
 
             $update_query = "INSERT INTO `contacts` (`employer_id`, `name`, `description`, `phone`, `email`, `location`, `city_id`, `state_id`, `country_id`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $app['db']->executeUpdate($update_query, array($data['employer_id'], $data['name'], $data['description'], $data['phone'], $data['email'], $data['location'], $data['city_id'], $data['state_id'], $data['country_id'], 1490204423, 1490204423));            
+            $app['db']->executeUpdate($update_query, array($data['employer_id'], $data['name'], $data['description'], $data['phone'], $data['email'], $data['location'], $data['city_id'], $data['state_id'], $data['country_id'], 1490610705, 1490610705));            
 
 
             $app['session']->getFlashBag()->add(
@@ -356,60 +299,6 @@ $app->match('/contacts/edit/{id}', function ($id) use ($app) {
 
     $form = $app['form.factory']->createBuilder('form', $initial_data);
 
-	$options = array();
-	$findexternal_sql = 'SELECT `id`, `name` FROM `city`';
-	$findexternal_rows = $app['db']->fetchAll($findexternal_sql, array());
-	foreach($findexternal_rows as $findexternal_row){
-	    $options[$findexternal_row['id']] = $findexternal_row['name'];
-	}
-	if(count($options) > 0){
-	    $form = $form->add('city_id', 'choice', array(
-	        'required' => false,
-	        'choices' => $options,
-	        'expanded' => false,
-	        'constraints' => new Assert\Choice(array_keys($options))
-	    ));
-	}
-	else{
-	    $form = $form->add('city_id', 'text', array('required' => false));
-	}
-
-	$options = array();
-	$findexternal_sql = 'SELECT `id`, `name` FROM `state`';
-	$findexternal_rows = $app['db']->fetchAll($findexternal_sql, array());
-	foreach($findexternal_rows as $findexternal_row){
-	    $options[$findexternal_row['id']] = $findexternal_row['name'];
-	}
-	if(count($options) > 0){
-	    $form = $form->add('state_id', 'choice', array(
-	        'required' => false,
-	        'choices' => $options,
-	        'expanded' => false,
-	        'constraints' => new Assert\Choice(array_keys($options))
-	    ));
-	}
-	else{
-	    $form = $form->add('state_id', 'text', array('required' => false));
-	}
-
-	$options = array();
-	$findexternal_sql = 'SELECT `id`, `name` FROM `country`';
-	$findexternal_rows = $app['db']->fetchAll($findexternal_sql, array());
-	foreach($findexternal_rows as $findexternal_row){
-	    $options[$findexternal_row['id']] = $findexternal_row['name'];
-	}
-	if(count($options) > 0){
-	    $form = $form->add('country_id', 'choice', array(
-	        'required' => false,
-	        'choices' => $options,
-	        'expanded' => false,
-	        'constraints' => new Assert\Choice(array_keys($options))
-	    ));
-	}
-	else{
-	    $form = $form->add('country_id', 'text', array('required' => false));
-	}
-
 
 	$form = $form->add('employer_id', 'text', array('required' => false));
 	$form = $form->add('name', 'text', array('required' => false));
@@ -417,6 +306,9 @@ $app->match('/contacts/edit/{id}', function ($id) use ($app) {
 	$form = $form->add('phone', 'text', array('required' => false));
 	$form = $form->add('email', 'text', array('required' => false));
 	$form = $form->add('location', 'text', array('required' => false));
+	$form = $form->add('city_id', 'text', array('required' => false));
+	$form = $form->add('state_id', 'text', array('required' => false));
+	$form = $form->add('country_id', 'text', array('required' => false));
 
 
     $form = $form->getForm();
@@ -429,7 +321,7 @@ $app->match('/contacts/edit/{id}', function ($id) use ($app) {
             $data = $form->getData();
 
             $update_query = "UPDATE `contacts` SET `employer_id` = ?, `name` = ?, `description` = ?, `phone` = ?, `email` = ?, `location` = ?, `city_id` = ?, `state_id` = ?, `country_id` = ?, `created_at` = ?, `updated_at` = ? WHERE `id` = ?";
-            $app['db']->executeUpdate($update_query, array($data['employer_id'], $data['name'], $data['description'], $data['phone'], $data['email'], $data['location'], $data['city_id'], $data['state_id'], $data['country_id'], $data['created_at'], 1490204423, $id));            
+            $app['db']->executeUpdate($update_query, array($data['employer_id'], $data['name'], $data['description'], $data['phone'], $data['email'], $data['location'], $data['city_id'], $data['state_id'], $data['country_id'], $data['created_at'], 1490610705, $id));            
 
 
             $app['session']->getFlashBag()->add(

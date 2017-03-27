@@ -90,44 +90,29 @@ $mysqli->close();
 <link href="/resources/css/AdminLTE.css" rel="stylesheet" type="text/css" />
 
 <div class="row">
-    <div class="row" style="height: 200px;"></div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-                <div class="row table table-bordered" style="border-spacing: 10px; border-color: #0073b7; background-color: #9cc2cb;">
-                    <form action="crud.php" method="post">
-                        <?php 
-                        for($i = 0 ; $i < count($dbTables) ; $i++)
-                        {
-                        ?>
-                        <div class="row" style="height: 30px;">
-                            <div class="col-md-12">
-                                <div class="col-md-6">
-                                    <input type="checkbox" class="checkbox" name="check_box[]" value="<?php echo $dbTables[$i] ?>" />
-                                </div>
-                                <div class="col-md-6">
-                                    <?php echo $dbTables[$i] ?>
-                                </div>
-                            </div>
-                        </div>
-                        <?php } ?>
-                        <div class="row" style="height: 30px;">
-                            <div class="col-md-12">
-                                <div class="col-md-6">
-                                    <input type="hidden" name="user_name" value="<?php echo $_POST['user_name'] ?>" />
-                                    <input type="hidden" name="password" value="<?php echo $_POST['password'] ?>" />
-                                    <input type="hidden" name="db_name" value="<?php echo $_POST['db_name'] ?>" />
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="submit" class="btn btn-primary" name="submit" value="Submit" />
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+    <div class="col-md-12">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="row">
+                <form action="crud.php" method="post">
+                    <?php 
+                    for($i = 0 ; $i < count($dbTables) ; $i++)
+                    {
+                    ?>
+                    <div class="checkbox">
+                        <label class="checkbox-inline"><input type="checkbox" name="check_box[]" value="<?php echo $dbTables[$i] ?>" /><?php echo $dbTables[$i] ?></label>
+                    </div>
+
+                    <?php } ?>
+
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" name="user_name" value="<?php echo $_POST['db_name'] ?>" />
+                    </div>    
+                    <input type="submit" class="btn btn-primary" name="submit" value="Submit" />
+                </form>
             </div>
-            <div class="row"></div>
+        </div>
+        <div class="col-md-4"></div>
     </div>
 </div>
 

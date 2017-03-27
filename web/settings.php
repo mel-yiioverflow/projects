@@ -32,34 +32,34 @@
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <div class="row table table-bordered" style="border-spacing: 10px; border-color: #0073b7; background-color: #c5a4a4;">
-                    <form action="db_config.php" method="post">
+                    <form action="select_tables.php" method="post">
                         <div class="row" style="height: 30px;">
-                            <div class="col-md-12">
+                            <div class="col-md-12 form-group">
                                 <div class="col-md-6">
                                     DB Name :
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" id="db_name" name="db_name" />
+                                    <input type="text" class="form-control" id="db_name" name="db_name" />
                                 </div>
                             </div>
                         </div>
                         <div class="row" style="height: 30px;">
-                            <div class="col-md-12">
+                            <div class="col-md-12 form-group">
                                 <div class="col-md-6">
                                     User :
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" id="user_name" name="user_name" />
+                                    <input type="text" class="form-control" id="user_name" name="user_name" />
                                 </div>
                             </div>
                         </div>
                         <div class="row" style="height: 30px;">
-                            <div class="col-md-12">
+                            <div class="col-md-12 form-group">
                                 <div class="col-md-6">
                                     Password :
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="password" id="password" name="password" />
+                                    <input type="password" class="form-control" id="password" name="password" />
                                 </div>
                             </div>
                         </div><br />

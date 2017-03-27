@@ -219,7 +219,7 @@ $app->match('/rbac_auth_item/create', function () use ($app) {
             $data = $form->getData();
 
             $update_query = "INSERT INTO `rbac_auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            $app['db']->executeUpdate($update_query, array($data['name'], $data['type'], $data['description'], $data['rule_name'], $data['data'], 1490204423, 1490204423));            
+            $app['db']->executeUpdate($update_query, array($data['name'], $data['type'], $data['description'], $data['rule_name'], $data['data'], 1490609833, 1490609833));            
 
 
             $app['session']->getFlashBag()->add(
@@ -290,7 +290,7 @@ $app->match('/rbac_auth_item/edit/{id}', function ($id) use ($app) {
             $data = $form->getData();
 
             $update_query = "UPDATE `rbac_auth_item` SET `name` = ?, `type` = ?, `description` = ?, `rule_name` = ?, `data` = ?, `created_at` = ?, `updated_at` = ? WHERE `name` = ?";
-            $app['db']->executeUpdate($update_query, array($data['name'], $data['type'], $data['description'], $data['rule_name'], $data['data'], $data['created_at'], 1490204423, $id));            
+            $app['db']->executeUpdate($update_query, array($data['name'], $data['type'], $data['description'], $data['rule_name'], $data['data'], $data['created_at'], 1490609833, $id));            
 
 
             $app['session']->getFlashBag()->add(

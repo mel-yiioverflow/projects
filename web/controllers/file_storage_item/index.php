@@ -228,7 +228,7 @@ $app->match('/file_storage_item/create', function () use ($app) {
             $data = $form->getData();
 
             $update_query = "INSERT INTO `file_storage_item` (`component`, `base_url`, `path`, `type`, `size`, `name`, `upload_ip`, `created_at`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            $app['db']->executeUpdate($update_query, array($data['component'], $data['base_url'], $data['path'], $data['type'], $data['size'], $data['name'], $data['upload_ip'], 1490204423));            
+            $app['db']->executeUpdate($update_query, array($data['component'], $data['base_url'], $data['path'], $data['type'], $data['size'], $data['name'], $data['upload_ip'], 1490609833));            
 
 
             $app['session']->getFlashBag()->add(

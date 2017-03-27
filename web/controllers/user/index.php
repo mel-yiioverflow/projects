@@ -242,7 +242,7 @@ $app->match('/user/create', function () use ($app) {
             $data = $form->getData();
 
             $update_query = "INSERT INTO `user` (`username`, `auth_key`, `access_token`, `password_hash`, `oauth_client`, `oauth_client_user_id`, `email`, `status`, `created_at`, `updated_at`, `logged_at`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $app['db']->executeUpdate($update_query, array($data['username'], $data['auth_key'], $data['access_token'], $data['password_hash'], $data['oauth_client'], $data['oauth_client_user_id'], $data['email'], $data['status'], 1490204423, 1490204423, $data['logged_at']));            
+            $app['db']->executeUpdate($update_query, array($data['username'], $data['auth_key'], $data['access_token'], $data['password_hash'], $data['oauth_client'], $data['oauth_client_user_id'], $data['email'], $data['status'], 1490609833, 1490609833, $data['logged_at']));            
 
 
             $app['session']->getFlashBag()->add(
@@ -321,7 +321,7 @@ $app->match('/user/edit/{id}', function ($id) use ($app) {
             $data = $form->getData();
 
             $update_query = "UPDATE `user` SET `username` = ?, `auth_key` = ?, `access_token` = ?, `password_hash` = ?, `oauth_client` = ?, `oauth_client_user_id` = ?, `email` = ?, `status` = ?, `created_at` = ?, `updated_at` = ?, `logged_at` = ? WHERE `id` = ?";
-            $app['db']->executeUpdate($update_query, array($data['username'], $data['auth_key'], $data['access_token'], $data['password_hash'], $data['oauth_client'], $data['oauth_client_user_id'], $data['email'], $data['status'], $data['created_at'], 1490204423, $data['logged_at'], $id));            
+            $app['db']->executeUpdate($update_query, array($data['username'], $data['auth_key'], $data['access_token'], $data['password_hash'], $data['oauth_client'], $data['oauth_client_user_id'], $data['email'], $data['status'], $data['created_at'], 1490609833, $data['logged_at'], $id));            
 
 
             $app['session']->getFlashBag()->add(

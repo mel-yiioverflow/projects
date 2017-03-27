@@ -202,7 +202,7 @@ $app->match('/employee_status/create', function () use ($app) {
             $data = $form->getData();
 
             $update_query = "INSERT INTO `employee_status` (`status`, `created_at`, `updated_at`) VALUES (?, ?, ?)";
-            $app['db']->executeUpdate($update_query, array($data['status'], 1490204423, 1490204423));            
+            $app['db']->executeUpdate($update_query, array($data['status'], 1490609833, 1490609833));            
 
 
             $app['session']->getFlashBag()->add(
@@ -265,7 +265,7 @@ $app->match('/employee_status/edit/{id}', function ($id) use ($app) {
             $data = $form->getData();
 
             $update_query = "UPDATE `employee_status` SET `status` = ?, `created_at` = ?, `updated_at` = ? WHERE `id` = ?";
-            $app['db']->executeUpdate($update_query, array($data['status'], $data['created_at'], 1490204423, $id));            
+            $app['db']->executeUpdate($update_query, array($data['status'], $data['created_at'], 1490609833, $id));            
 
 
             $app['session']->getFlashBag()->add(

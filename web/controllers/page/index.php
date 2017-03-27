@@ -222,7 +222,7 @@ $app->match('/page/create', function () use ($app) {
             $data = $form->getData();
 
             $update_query = "INSERT INTO `page` (`slug`, `title`, `body`, `view`, `status`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            $app['db']->executeUpdate($update_query, array($data['slug'], $data['title'], $data['body'], $data['view'], $data['status'], 1490204423, 1490204423));            
+            $app['db']->executeUpdate($update_query, array($data['slug'], $data['title'], $data['body'], $data['view'], $data['status'], 1490609833, 1490609833));            
 
 
             $app['session']->getFlashBag()->add(
@@ -293,7 +293,7 @@ $app->match('/page/edit/{id}', function ($id) use ($app) {
             $data = $form->getData();
 
             $update_query = "UPDATE `page` SET `slug` = ?, `title` = ?, `body` = ?, `view` = ?, `status` = ?, `created_at` = ?, `updated_at` = ? WHERE `id` = ?";
-            $app['db']->executeUpdate($update_query, array($data['slug'], $data['title'], $data['body'], $data['view'], $data['status'], $data['created_at'], 1490204423, $id));            
+            $app['db']->executeUpdate($update_query, array($data['slug'], $data['title'], $data['body'], $data['view'], $data['status'], $data['created_at'], 1490609833, $id));            
 
 
             $app['session']->getFlashBag()->add(

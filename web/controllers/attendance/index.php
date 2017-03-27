@@ -207,7 +207,7 @@ $app->match('/attendance/create', function () use ($app) {
             $data = $form->getData();
 
             $update_query = "INSERT INTO `attendance` (`date_time`, `employee_id`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?)";
-            $app['db']->executeUpdate($update_query, array($data['date_time'], $data['employee_id'], 1490204423, 1490204423));            
+            $app['db']->executeUpdate($update_query, array($data['date_time'], $data['employee_id'], 1490610538, 1490610538));            
 
 
             $app['session']->getFlashBag()->add(
@@ -272,7 +272,7 @@ $app->match('/attendance/edit/{id}', function ($id) use ($app) {
             $data = $form->getData();
 
             $update_query = "UPDATE `attendance` SET `date_time` = ?, `employee_id` = ?, `created_at` = ?, `updated_at` = ? WHERE `id` = ?";
-            $app['db']->executeUpdate($update_query, array($data['date_time'], $data['employee_id'], $data['created_at'], 1490204423, $id));            
+            $app['db']->executeUpdate($update_query, array($data['date_time'], $data['employee_id'], $data['created_at'], 1490610538, $id));            
 
 
             $app['session']->getFlashBag()->add(

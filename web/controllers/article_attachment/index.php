@@ -241,7 +241,7 @@ $app->match('/article_attachment/create', function () use ($app) {
             $data = $form->getData();
 
             $update_query = "INSERT INTO `article_attachment` (`article_id`, `path`, `base_url`, `type`, `size`, `name`, `created_at`, `order`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            $app['db']->executeUpdate($update_query, array($data['article_id'], $data['path'], $data['base_url'], $data['type'], $data['size'], $data['name'], 1490204423, $data['order']));            
+            $app['db']->executeUpdate($update_query, array($data['article_id'], $data['path'], $data['base_url'], $data['type'], $data['size'], $data['name'], 1490609833, $data['order']));            
 
 
             $app['session']->getFlashBag()->add(
