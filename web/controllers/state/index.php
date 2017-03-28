@@ -220,7 +220,7 @@ $app->match('/state/create', function () use ($app) {
             $data = $form->getData();
 
             $update_query = "INSERT INTO `state` (`name`, `country_id`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?)";
-            $app['db']->executeUpdate($update_query, array($data['name'], $data['country_id'], 1490609833, 1490609833));            
+            $app['db']->executeUpdate($update_query, array($data['name'], $data['country_id'], 1490680861, 1490680861));            
 
 
             $app['session']->getFlashBag()->add(
@@ -302,7 +302,7 @@ $app->match('/state/edit/{id}', function ($id) use ($app) {
             $data = $form->getData();
 
             $update_query = "UPDATE `state` SET `name` = ?, `country_id` = ?, `created_at` = ?, `updated_at` = ? WHERE `id` = ?";
-            $app['db']->executeUpdate($update_query, array($data['name'], $data['country_id'], $data['created_at'], 1490609833, $id));            
+            $app['db']->executeUpdate($update_query, array($data['name'], $data['country_id'], $data['created_at'], 1490680861, $id));            
 
 
             $app['session']->getFlashBag()->add(

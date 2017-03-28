@@ -54,19 +54,19 @@ $getTablesQuery = "SHOW TABLES";
 $result = $mysqli->query($getTablesQuery);
 
 while($getTablesResult = $result->fetch_row())
-        {
-            $rows[] = $getTablesResult;
-            
-        }        
-        foreach ($rows as $key => $r1)
-        {
-            foreach ($r1 as $key => $r2)
-            {
-                $dbTables[] = $r2;
-            }
-            
-        
-        }
+{
+    $rows[] = $getTablesResult;
+
+}        
+foreach ($rows as $key => $r1)
+{
+    foreach ($r1 as $key => $r2)
+    {
+        $dbTables[] = $r2;
+    }
+
+
+}
         
 $result->free();
 $mysqli->close();
@@ -90,32 +90,40 @@ $mysqli->close();
 <link href="/resources/css/AdminLTE.css" rel="stylesheet" type="text/css" />
 
 <div class="row">
-    <div class="col-md-12">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-            <div class="row">
-                <form action="crud.php" method="post">
-                    <?php 
-                    for($i = 0 ; $i < count($dbTables) ; $i++)
-                    {
-                    ?>
-                    <div class="checkbox">
-                        <label class="checkbox-inline"><input type="checkbox" name="check_box[]" value="<?php echo $dbTables[$i] ?>" /><?php echo $dbTables[$i] ?></label>
-                    </div>
-
-                    <?php } ?>
-
-                    <div class="form-group">
-                        <input type="hidden" class="form-control" name="user_name" value="<?php echo $_POST['db_name'] ?>" />
-                    </div>    
-                    <input type="submit" class="btn btn-primary" name="submit" value="Submit" />
-                </form>
+    <div class="row" style="height: 150px;"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="row table table-bordered"  style="border-spacing: 10px;">
+                    <form action="crud.php" method="post">
+                        <div class="col-md-12">
+                        <?php 
+                        for($i = 0 ; $i < count($dbTables) ; )
+                        {
+                        ?>
+                            <div class="col-md-4" style="width: 180px;">
+                                <label class="checkbox-inline"><input type="checkbox" name="check_box[]" value="<?php echo $dbTables[$i] ?>" /><?php echo $dbTables[$i] ?></label>
+                            </div>
+                        <?php
+                            $i++; // you could pre-incremment $count in the if statement
+                            if ( $i % 3 === 0 && $i !== count($dbTables) ) {
+                                 echo '<br>';
+                            }
+                        } ?>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="db_name" value="<?php echo $_POST['db_name'] ?>" />
+                        </div>    
+                        <center><button type="submit" class="btn btn-default">Submit</button></center>
+                    </form>
+                </div>
             </div>
+            <div class="col-md-4"></div>
         </div>
-        <div class="col-md-4"></div>
     </div>
+    <div class="row"></div>
 </div>
-
 
 			
 

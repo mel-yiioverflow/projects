@@ -242,7 +242,7 @@ $app->match('/contacts/create', function () use ($app) {
             $data = $form->getData();
 
             $update_query = "INSERT INTO `contacts` (`employer_id`, `name`, `description`, `phone`, `email`, `location`, `city_id`, `state_id`, `country_id`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $app['db']->executeUpdate($update_query, array($data['employer_id'], $data['name'], $data['description'], $data['phone'], $data['email'], $data['location'], $data['city_id'], $data['state_id'], $data['country_id'], 1490610705, 1490610705));            
+            $app['db']->executeUpdate($update_query, array($data['employer_id'], $data['name'], $data['description'], $data['phone'], $data['email'], $data['location'], $data['city_id'], $data['state_id'], $data['country_id'], 1490682711, 1490682711));            
 
 
             $app['session']->getFlashBag()->add(
@@ -321,7 +321,7 @@ $app->match('/contacts/edit/{id}', function ($id) use ($app) {
             $data = $form->getData();
 
             $update_query = "UPDATE `contacts` SET `employer_id` = ?, `name` = ?, `description` = ?, `phone` = ?, `email` = ?, `location` = ?, `city_id` = ?, `state_id` = ?, `country_id` = ?, `created_at` = ?, `updated_at` = ? WHERE `id` = ?";
-            $app['db']->executeUpdate($update_query, array($data['employer_id'], $data['name'], $data['description'], $data['phone'], $data['email'], $data['location'], $data['city_id'], $data['state_id'], $data['country_id'], $data['created_at'], 1490610705, $id));            
+            $app['db']->executeUpdate($update_query, array($data['employer_id'], $data['name'], $data['description'], $data['phone'], $data['email'], $data['location'], $data['city_id'], $data['state_id'], $data['country_id'], $data['created_at'], 1490682711, $id));            
 
 
             $app['session']->getFlashBag()->add(

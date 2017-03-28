@@ -213,7 +213,7 @@ $app->match('/timeline_event/create', function () use ($app) {
             $data = $form->getData();
 
             $update_query = "INSERT INTO `timeline_event` (`application`, `category`, `event`, `data`, `created_at`) VALUES (?, ?, ?, ?, ?)";
-            $app['db']->executeUpdate($update_query, array($data['application'], $data['category'], $data['event'], $data['data'], 1490609833));            
+            $app['db']->executeUpdate($update_query, array($data['application'], $data['category'], $data['event'], $data['data'], 1490680861));            
 
 
             $app['session']->getFlashBag()->add(

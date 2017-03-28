@@ -222,7 +222,7 @@ $app->match('/article_category/create', function () use ($app) {
             $data = $form->getData();
 
             $update_query = "INSERT INTO `article_category` (`slug`, `title`, `body`, `parent_id`, `status`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            $app['db']->executeUpdate($update_query, array($data['slug'], $data['title'], $data['body'], $data['parent_id'], $data['status'], 1490612280, 1490612280));            
+            $app['db']->executeUpdate($update_query, array($data['slug'], $data['title'], $data['body'], $data['parent_id'], $data['status'], 1490680861, 1490680861));            
 
 
             $app['session']->getFlashBag()->add(
@@ -293,7 +293,7 @@ $app->match('/article_category/edit/{id}', function ($id) use ($app) {
             $data = $form->getData();
 
             $update_query = "UPDATE `article_category` SET `slug` = ?, `title` = ?, `body` = ?, `parent_id` = ?, `status` = ?, `created_at` = ?, `updated_at` = ? WHERE `id` = ?";
-            $app['db']->executeUpdate($update_query, array($data['slug'], $data['title'], $data['body'], $data['parent_id'], $data['status'], $data['created_at'], 1490612280, $id));            
+            $app['db']->executeUpdate($update_query, array($data['slug'], $data['title'], $data['body'], $data['parent_id'], $data['status'], $data['created_at'], 1490680861, $id));            
 
 
             $app['session']->getFlashBag()->add(
