@@ -2,27 +2,27 @@
 
 {% block menu %}
 
-<li class="treeview {% if option is defined and (option == 'attendance_list' or option == 'attendance_create' or option == 'attendance_edit') %}active{% endif %}">
+<li class="treeview {% if option is defined and (option == 'employee_qualification_list' or option == 'employee_qualification_create' or option == 'employee_qualification_edit') %}active{% endif %}">
     <a href="#">
         <i class="fa fa-folder-o"></i>
-        <span>attendance</span>
+        <span>employee_qualification</span>
         <i class="fa pull-right fa-angle-right"></i>
     </a>
     <ul class="treeview-menu" style="display: none;">
-        <li {% if option is defined and option == 'attendance_list' %}class="active"{% endif %}><a href="{{ path('attendance_list') }}" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> List</a></li>
-        <li {% if option is defined and option == 'attendance_create' %}class="active"{% endif %}><a href="{{ path('attendance_create') }}" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Create</a></li>
+        <li {% if option is defined and option == 'employee_qualification_list' %}class="active"{% endif %}><a href="{{ path('employee_qualification_list') }}" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> List</a></li>
+        <li {% if option is defined and option == 'employee_qualification_create' %}class="active"{% endif %}><a href="{{ path('employee_qualification_create') }}" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Create</a></li>
     </ul>
 </li>
 
-<li class="treeview {% if option is defined and (option == 'contacts_list' or option == 'contacts_create' or option == 'contacts_edit') %}active{% endif %}">
+<li class="treeview {% if option is defined and (option == 'employee_salary_list' or option == 'employee_salary_create' or option == 'employee_salary_edit') %}active{% endif %}">
     <a href="#">
         <i class="fa fa-folder-o"></i>
-        <span>contacts</span>
+        <span>employee_salary</span>
         <i class="fa pull-right fa-angle-right"></i>
     </a>
     <ul class="treeview-menu" style="display: none;">
-        <li {% if option is defined and option == 'contacts_list' %}class="active"{% endif %}><a href="{{ path('contacts_list') }}" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> List</a></li>
-        <li {% if option is defined and option == 'contacts_create' %}class="active"{% endif %}><a href="{{ path('contacts_create') }}" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Create</a></li>
+        <li {% if option is defined and option == 'employee_salary_list' %}class="active"{% endif %}><a href="{{ path('employee_salary_list') }}" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> List</a></li>
+        <li {% if option is defined and option == 'employee_salary_create' %}class="active"{% endif %}><a href="{{ path('employee_salary_create') }}" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Create</a></li>
     </ul>
 </li>
 

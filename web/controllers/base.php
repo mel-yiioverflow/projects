@@ -15,8 +15,8 @@ require_once __DIR__.'/../../vendor/autoload.php';
 require_once __DIR__.'/../../src/app.php';
 
 
-require_once __DIR__.'/attendance/index.php';
-require_once __DIR__.'/contacts/index.php';
+require_once __DIR__.'/employee_qualification/index.php';
+require_once __DIR__.'/employee_salary/index.php';
 
 
 

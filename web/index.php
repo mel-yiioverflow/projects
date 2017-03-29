@@ -1,20 +1,3 @@
-
-<header class="header">
-    <a href="" class="logo">Crud Generator</a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top" role="navigation">
-
-        <!-- Sidebar toggle button-->
-        <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </a>
-
-    </nav>
-</header>
-
 <?php
 
 /*
@@ -46,45 +29,30 @@
 <link href="/resources/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
 <!-- Theme style -->
 <link href="/resources/css/AdminLTE.css" rel="stylesheet" type="text/css" />
-<div class="wrapper row-offcanvas row-offcanvas-left">
-     <!-- Right side column. Contains the navbar and content of the page -->
-        <aside class="right-side">                
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <h1>
-                    Configuration Settings
-                </h1>
-            </section>
 
-            <!-- Main content -->
-            <section class="content">
-                <div class="row">
-                    <div class="row"  style="width: 100%; height: 250px"></div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-4"></div>
-                            <div class="col-md-4">
-                                <div class="col-md-12 table table-bordered" style="border-spacing: 5px;">
-                                    <br />
-                                    <div class="col-md-6">
-                                        <form action="settings.php" method="post">
-                                            <button type="submit" class="btn btn-default">Add Settings</button>
-                                        </form>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <form action="cruds.php" method="post">
-                                            <button type="submit" class="btn btn-default">List Cruds</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4"></div>
-                        </div>
+<div class="row">
+    <div class="row"  style="width: 100%; height: 250px"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="col-md-12 table table-bordered" style="border-spacing: 5px;">
+                    <br />
+                    <div class="col-md-6">
+                        <form action="settings.php" method="post">
+                            <button type="submit" class="btn btn-default">Add Settings</button>
+                        </form>
                     </div>
-                    <div class="row"></div>
+                    <div class="col-md-6">
+                        <form action="cruds.php" method="post">
+                            <button type="submit" class="btn btn-default">List Cruds</button>
+                        </form>
+                    </div>
                 </div>
-            </section><!-- /.content -->
-        </aside><!-- /.right-side -->
-    </div><!-- ./wrapper -->
-
-</div>    
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+    <div class="row"></div>
+</div>
+           
